@@ -1,56 +1,57 @@
-# Welcome to your Expo app 👋
+# Todo App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+App de tareas hecha con React Native y Expo (Expo Router).
 
-## Get started
+## Qué hace
 
-1. Install dependencies
+- Muestra las tareas iniciales de `data/todos.js`.
+- Agrega una tarea con el botón **Add** (o con Enter). No acepta textos vacíos.
+- Tocar una tarea la marca como completada (gris y tachada); tocarla otra vez la desmarca.
+- El ícono de basura elimina la tarea.
+- El ícono de información (o mantener presionada la tarea) abre `/details/[id]`, donde se puede editar el título y cambiar el estado.
+- El botón de sol/luna cambia entre tema claro y oscuro.
+- La lista se guarda con AsyncStorage, así que no se pierde al cerrar la app.
 
-   ```bash
-   npm install
-   ```
+## Estructura
 
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **src/app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```text
+components/
+  TodoItem.jsx        # Cada fila de la lista
+constants/
+  colors.js           # Colores del tema claro y oscuro
+context/
+  ThemeContext.js     # Contexto del tema
+  TodosContext.js     # Comparte la lista entre pantallas
+data/
+  todos.js            # Tareas iniciales
+hooks/
+  useTodos.js         # Estado de la lista: agregar, completar, editar, eliminar, cargar y guardar
+utils/
+  todoStorage.js      # Guardar y leer la lista con AsyncStorage
+src/app/
+  _layout.tsx         # Stack de navegación + providers
+  index.jsx           # Pantalla principal
+  details/
+    [id].jsx          # Pantalla de detalles (editar tarea)
 ```
 
-This command will move the starter code to the **example** directory and create a blank **src/app** directory where you can start developing.
+## Cómo se creó
 
-### Other setup steps
+```bash
+npx create-expo-app@latest todo-app
+npm run reset-project
+npx expo install @expo/vector-icons @react-native-async-storage/async-storage
+```
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+## Cómo correrla
 
-## Learn more
+```bash
+npm install
+npm start
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+Para abrirla directo en el navegador:
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+```bash
+npm run web
+```
